@@ -22,20 +22,14 @@ function renderTable(list) {
   list.forEach(book => {
     const title = book["Book Title"] || "";
     const author = book["Author"] || "";
-    const edition = book["Edition"] || "";
     const topic = book["Topic"] || "";
-    const contributor = book["Contributor Name"] || "";
-
-    // ✅ Correct handling of Google Drive links
     const link = (book["File Link"] || "").trim();
 
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${title}</td>
       <td>${author}</td>
-      <td>${edition}</td>
       <td>${topic}</td>
-      <td>${contributor}</td>
       <td>
         <a href="${link}" target="_blank" rel="noopener noreferrer">
           Open
@@ -46,6 +40,7 @@ function renderTable(list) {
     tableBody.appendChild(row);
   });
 }
+
 
 // 🔍 Search functionality
 document.getElementById("search").addEventListener("input", event => {
