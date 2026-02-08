@@ -21,7 +21,7 @@ function displayBooks(list) {
       <td>${book["Author"] || ""}</td>
       <td>${book["Topic"] || ""}</td>
       <td>
-        <a href="${book["File Link"]}" target="_blank">Open</a>
+        <a href="https://drive.google.com/file/d/${book["File Link"]}/view" target="_blank">   Open </a>
       </td>
     `;
     table.appendChild(row);
