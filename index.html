@@ -1,18 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <title>Department E-Books</title>
   <meta name="robots" content="noindex, nofollow">
-  <title>Department Library</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Department Library Portal</h1>
-<p>Search books, library holdings, and PYQs</p>
+<h1>📚 Department E-Books Catalogue</h1>
 
-<input type="text" placeholder="Search..." />
+<input
+  type="text"
+  id="search"
+  placeholder="Search by title, author, subject..."
+>
 
-<p>🚧 Content coming soon</p>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Subject</th>
+      <th>Open</th>
+    </tr>
+  </thead>
+  <tbody id="bookTable"></tbody>
+</table>
 
+<script src="script.js"></script>
 </body>
 </html>
