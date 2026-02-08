@@ -1,41 +1,63 @@
+// 🔗 Replace this with your actual JSON URL
 const JSON_URL = "https://opensheet.elk.sh/19kqMNS8ZkDTItBtPLiJmVMZn2FtXFMU6MWh68zYoydM/Sheet1";
 
 let books = [];
 
+// Fetch data from Google Sheet JSON
 fetch(JSON_URL)
-  .then(res => res.json())
+  .then(response => response.json())
   .then(data => {
     books = data;
-    displayBooks(books);
+    renderTable(books);
   })
-  .catch(err => console.error("JSON load error:", err));
+  .catch(error => {
+    console.error("Error loading JSON:", error);
+  });
 
-function displayBooks(list) {
-  const table = document.getElementById("bookTable");
-  table.innerHTML = "";
+// Render table rows
+function renderTable(list) {
+  const tableBody = document.getElementById("bookTable");
+  tableBody.innerHTML = "";
 
   list.forEach(book => {
+    const title = book["Book Title"] || "";
+    const author = book["Author"] || "";
+    const topic = book["Topic"] || "";
+    const edition = book["Edition"] || "";
+    const contributor = book["Contributor Name"] || "";
+
+    // Clean & safe Google Drive link
+    const rawLink = (book["File Link"] || "").trim();
+    const link = encodeURI(rawLink);
+
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td>${book["Book Title"] || ""}</td>
-      <td>${book["Author"] || ""}</td>
-      <td>${book["Topic"] || ""}</td>
+      <td>${title}</td>
+      <td>${author}</td>
+      <td>${edition}</td>
+      <td>${topic}</td>
+      <td>${contributor}</td>
       <td>
-        <a href="https://drive.google.com/file/d/${book["File Link"]}/view" target="_blank">   Open </a>
+        <a href="${link}" target="_blank" rel="noopener noreferrer">
+          Open
+        </a>
       </td>
     `;
-    table.appendChild(row);
+
+    tableBody.appendChild(row);
   });
 }
 
-document.getElementById("search").addEventListener("input", e => {
-  const value = e.target.value.toLowerCase();
+// 🔍 Search functionality
+document.getElementById("search").addEventListener("input", event => {
+  const query = event.target.value.toLowerCase();
 
-  const filtered = books.filter(book =>
-    (book["Book Title"] || "").toLowerCase().includes(value) ||
-    (book["Author"] || "").toLowerCase().includes(value) ||
-    (book["Topic"] || "").toLowerCase().includes(value)
+  const filteredBooks = books.filter(book =>
+    (book["Book Title"] || "").toLowerCase().includes(query) ||
+    (book["Author"] || "").toLowerCase().includes(query) ||
+    (book["Topic"] || "").toLowerCase().includes(query) ||
+    (book["Contributor Name"] || "").toLowerCase().includes(query)
   );
 
-  displayBooks(filtered);
+  renderTable(filteredBooks);
 });
