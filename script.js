@@ -1,4 +1,4 @@
-// 🔗 Replace this with your actual JSON URL
+// 🔗 Replace with your actual JSON URL
 const JSON_URL = "https://opensheet.elk.sh/19kqMNS8ZkDTItBtPLiJmVMZn2FtXFMU6MWh68zYoydM/Sheet1";
 
 let books = [];
@@ -14,7 +14,7 @@ fetch(JSON_URL)
     console.error("Error loading JSON:", error);
   });
 
-// Render table rows
+// Render table
 function renderTable(list) {
   const tableBody = document.getElementById("bookTable");
   tableBody.innerHTML = "";
@@ -22,13 +22,12 @@ function renderTable(list) {
   list.forEach(book => {
     const title = book["Book Title"] || "";
     const author = book["Author"] || "";
-    const topic = book["Topic"] || "";
     const edition = book["Edition"] || "";
+    const topic = book["Topic"] || "";
     const contributor = book["Contributor Name"] || "";
 
-    // Clean & safe Google Drive link
-    const rawLink = (book["File Link"] || "").trim();
-    const link = encodeURI(rawLink);
+    // ✅ Correct handling of Google Drive links
+    const link = (book["File Link"] || "").trim();
 
     const row = document.createElement("tr");
     row.innerHTML = `
