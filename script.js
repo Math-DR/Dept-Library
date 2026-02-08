@@ -8,9 +8,7 @@ fetch(JSON_URL)
     books = data;
     displayBooks(books);
   })
-  .catch(err => {
-    console.error("Error loading data:", err);
-  });
+  .catch(err => console.error("JSON load error:", err));
 
 function displayBooks(list) {
   const table = document.getElementById("bookTable");
@@ -19,10 +17,12 @@ function displayBooks(list) {
   list.forEach(book => {
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td>${book.title || ""}</td>
-      <td>${book.author || ""}</td>
-      <td>${book.subject || ""}</td>
-      <td><a href="${book.link}" target="_blank">Open</a></td>
+      <td>${book["Book Title"] || ""}</td>
+      <td>${book["Author"] || ""}</td>
+      <td>${book["Topic"] || ""}</td>
+      <td>
+        <a href="${book["File Link"]}" target="_blank">Open</a>
+      </td>
     `;
     table.appendChild(row);
   });
@@ -31,12 +31,11 @@ function displayBooks(list) {
 document.getElementById("search").addEventListener("input", e => {
   const value = e.target.value.toLowerCase();
 
-  const filtered = books.filter(b =>
-    (b.title || "").toLowerCase().includes(value) ||
-    (b.author || "").toLowerCase().includes(value) ||
-    (b.subject || "").toLowerCase().includes(value)
+  const filtered = books.filter(book =>
+    (book["Book Title"] || "").toLowerCase().includes(value) ||
+    (book["Author"] || "").toLowerCase().includes(value) ||
+    (book["Topic"] || "").toLowerCase().includes(value)
   );
 
   displayBooks(filtered);
 });
-
