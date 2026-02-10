@@ -27,14 +27,15 @@ function renderTable(list) {
 
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td>${title}</td>
-      <td>${author}</td>
-      <td>${topic}</td>
       <td>
-        <a href="${link}" target="_blank" rel="noopener noreferrer">
+      ${title}
+      <a href="${link}" target="_blank" rel="noopener noreferrer">
           Open
         </a>
       </td>
+      <td>${author}</td>
+      <td>${topic}</td>
+     
     `;
 
     tableBody.appendChild(row);
