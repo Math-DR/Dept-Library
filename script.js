@@ -1,5 +1,5 @@
 // 🔗 Replace with your actual JSON URL
-const JSON_URL = "https://opensheet.elk.sh/19kqMNS8ZkDTItBtPLiJmVMZn2FtXFMU6MWh68zYoydM//Sheet1";
+const JSON_URL = "https://opensheet.elk.sh/19kqMNS8ZkDTItBtPLiJmVMZn2FtXFMU6MWh68zYoydM/Sheet1";
 
 let books = [];
 
