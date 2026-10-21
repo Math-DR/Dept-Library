@@ -84,6 +84,3 @@ To change the contribution form, update its URL in `index.html`.
 
 Students can contribute books through the contribution form. Please ensure that submitted details and file links are accurate and accessible.
 
-## 📄 License
-
-Add a license if you intend to make the project available for reuse by others.
